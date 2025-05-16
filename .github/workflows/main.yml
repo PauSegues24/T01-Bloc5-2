@@ -1,0 +1,24 @@
+name: Executar Python cada 5 minuts
+
+on:
+  schedule:
+    - cron: '*/5 * * * *'  # Cada 5 minuts
+
+jobs:
+  run-python:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clonar repositori
+        uses: actions/checkout@v3
+
+      - name: Configurar Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Instal·lar dependències
+        run: pip install -r requirements.txt
+
+      - name: Executar script Python
+        run: python el_teu_programa.py
