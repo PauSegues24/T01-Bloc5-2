@@ -2,7 +2,6 @@ name: Executar Python i pujar JSON cada 5 minuts
 
 on:
   schedule:
-    - cron: '*/5 * * * *'
   workflow_dispatch:
 
 permissions:
