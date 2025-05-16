@@ -2,8 +2,8 @@ name: Executar Python i pujar JSON cada 5 minuts
 
 on:
   schedule:
-    - cron: '*/5 * * * *'  # Cada 5 minuts
-  workflow_dispatch:       # Per executar manualment si vols provar
+    - cron: '*/5 * * * *'
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -13,18 +13,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Clonar repositori
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
         with:
           persist-credentials: false
 
-      - name: Configurar Python
-        uses: actions/setup-python@v4
+      - uses: actions/setup-python@v4
         with:
           python-version: '3.11'
-
-      - name: Instal·lar dependències
-        run: pip install -r requirements.txt
 
       - name: Executar script Python
         run: python el_teu_programa.py
