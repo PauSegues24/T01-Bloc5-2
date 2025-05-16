@@ -26,7 +26,7 @@ jobs:
       - name: Instal·lar dependències necessàries
         run: |
           pip install --upgrade pip
-          pip install openmeteo-requests pandas requests
+          pip install openmeteo-requests pandas requests requests-cache
 
       - name: Executar script Python
         run: python temperatures.py
