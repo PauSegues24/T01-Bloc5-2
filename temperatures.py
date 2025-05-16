@@ -76,7 +76,7 @@ resultats = {
     "temperatura_mitjana": mitjana
 }
 # Generem el nom del fitxer amb la data actual
-data_actual = datetime.now().strftime("%Y%m%d")
+data_actual = datetime.now().strftime("%Y%m%d%h")
 nom_fitxer = f"temp_{data_actual}.json"
 # Guardem el diccionari en un fitxer .json
 with open(nom_fitxer, "w") as fitxer:
