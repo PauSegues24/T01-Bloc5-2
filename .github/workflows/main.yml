@@ -1,8 +1,11 @@
-name: Executar Python cada 5 minuts
+name: Executar Python i pujar JSON cada 5 minuts
 
 on:
   schedule:
     - cron: '*/5 * * * *'  # Cada 5 minuts
+
+permissions:
+  contents: write  # Permís per fer commits i push
 
 jobs:
   run-python:
@@ -11,6 +14,8 @@ jobs:
     steps:
       - name: Clonar repositori
         uses: actions/checkout@v3
+        with:
+          persist-credentials: false  # Per usar un token personal a continuació
 
       - name: Configurar Python
         uses: actions/setup-python@v4
@@ -22,3 +27,19 @@ jobs:
 
       - name: Executar script Python
         run: python el_teu_programa.py
+
+      - name: Configurar Git per fer commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Afegir fitxers .json i fer commit
+        run: |
+          git add temp_*.json
+          git commit -m "Afegit fitxer de temperatura generat per GitHub Actions [skip ci]" || echo "No hi ha canvis per commitar"
+
+      - name: Pujar canvis al repositori
+        run: git push
+        env:
+          # El token d'accés automàtic de GitHub Actions
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
