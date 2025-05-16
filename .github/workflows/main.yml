@@ -22,7 +22,7 @@ jobs:
           python-version: '3.11'
 
       - name: Executar script Python
-        run: python el_teu_programa.py
+        run: python temperatures.py
 
       - name: Llistar fitxers generats
         run: ls -l temp_*.json || echo "No s'han generat fitxers .json"
