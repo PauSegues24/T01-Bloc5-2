@@ -2,8 +2,8 @@ name: Executar Python i pujar JSON cada 5 minuts
 
 on:
   schedule:
-    - cron: '*/5 * * * *'
-  workflow_dispatch:
+    - cron: '*/5 * * * *'  # Cada 5 minuts
+  workflow_dispatch:       # Per executar manualment
 
 permissions:
   contents: write
@@ -13,13 +13,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Clonar repositori
+        uses: actions/checkout@v3
         with:
           persist-credentials: false
 
-      - uses: actions/setup-python@v4
+      - name: Configurar Python
+        uses: actions/setup-python@v4
         with:
           python-version: '3.11'
+
+      - name: Instal·lar dependències necessàries
+        run: pip install openmeteo-requests
 
       - name: Executar script Python
         run: python temperatures.py
